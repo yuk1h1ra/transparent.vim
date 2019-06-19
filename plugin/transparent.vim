@@ -19,6 +19,7 @@ function! s:clear_background()
 endfunction
 
 augroup Transparent
+  autocmd ColorScheme * execute "call s:clear_background()"
   autocmd VimEnter * execute "call s:clear_background()"
 augroup END
 
