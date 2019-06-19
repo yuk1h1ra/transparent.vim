@@ -10,13 +10,16 @@ let g:loaded_transparent = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-augroup TransparentSetBGNONE
-  autocmd!
-  autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
-  autocmd ColorScheme * highlight LineNr ctermbg=NONE guibg=NONE
-  autocmd ColorScheme * highlight SignColumn ctermbg=NONE guibg=NONE
-  autocmd ColorScheme * highlight VertSplit ctermbg=NONE guibg=NONE
-  autocmd ColorScheme * highlight NonText ctermbg=NONE guibg=NONE
+function! s:clear_background()
+  execute 'highlight Normal ctermbg=NONE guibg=NONE'
+  execute 'highlight LineNr ctermbg=NONE guibg=NONE'
+  execute 'highlight SignColumn ctermbg=NONE guibg=NONE'
+  execute 'highlight VertSplit ctermbg=NONE guibg=NONE'
+  execute 'highlight NonText ctermbg=NONE guibg=NONE'
+endfunction
+
+augroup Transparent
+  autocmd VimEnter * execute "call s:clear_background"
 augroup END
 
 let &cpo = s:save_cpo
