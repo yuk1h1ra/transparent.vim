@@ -10,12 +10,16 @@ let g:loaded_transparent = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
+function! s:highlight_set_none(hi_group)
+  execute 'highlight ' . a:hi_group . ' ctermbg=NONE guibg=NONE'
+endfunction
+
 function! s:clear_background()
-  execute 'highlight Normal ctermbg=NONE guibg=NONE'
-  execute 'highlight LineNr ctermbg=NONE guibg=NONE'
-  execute 'highlight SignColumn ctermbg=NONE guibg=NONE'
-  execute 'highlight VertSplit ctermbg=NONE guibg=NONE'
-  execute 'highlight NonText ctermbg=NONE guibg=NONE'
+  call s:highlight_set_none('Normal')
+  call s:highlight_set_none('LineNr')
+  call s:highlight_set_none('SignColumn')
+  call s:highlight_set_none('VertSplit')
+  call s:highlight_set_none('NonText')
 endfunction
 
 augroup Transparent
