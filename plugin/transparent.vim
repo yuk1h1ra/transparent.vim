@@ -14,7 +14,7 @@ function! s:highlight_group_bg_none(hi_group) abort
   execute 'highlight ' . a:hi_group . ' ctermbg=NONE guibg=NONE'
 endfunction
 
-function! s:clear_background() abort
+function! s:transparent_background() abort
   call s:highlight_group_bg_none('Normal')
   call s:highlight_group_bg_none('LineNr')
   call s:highlight_group_bg_none('CursorLine')
@@ -23,23 +23,12 @@ function! s:clear_background() abort
   call s:highlight_group_bg_none('NonText')
 endfunction
 
-function! s:restore_background() abort
-  let l:current_always_flag = get(g:, 'transparentBG_always_enable', 1)
-  let g:transparentBG_always_enable = 0
-  let l:colorscheme_name = get(g:, 'colors_name')
-  execute 'colorscheme ' . l:colorscheme_name
-  let g:transparentBG_always_enable = l:current_always_flag
-endfunction
-
 augroup TransparentBG
   if get(g:, 'transparentBG_always_enable', 1)
-    autocmd ColorScheme * execute "call s:clear_background()"
-    autocmd VimEnter * execute "call s:clear_background()"
+    autocmd ColorScheme * execute "call s:transparent_background()"
+    autocmd VimEnter * execute "call s:transparent_background()"
   endif
 augroup END
-
-command! TransparentBGEnable call s:clear_background()
-command! TransparentBGRestore call s:restore_background()
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
