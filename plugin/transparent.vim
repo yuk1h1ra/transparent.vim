@@ -24,8 +24,11 @@ function! s:clear_background() abort
 endfunction
 
 function! s:restore_background() abort
+  let l:current_always_flag = get(g:, 'transparentBG_always_enable', 1)
+  let g:transparentBG_always_enable = 0
   let l:colorscheme_name = get(g:, 'colors_name')
   execute 'colorscheme ' . l:colorscheme_name
+  let g:transparentBG_always_enable = l:current_always_flag
 endfunction
 
 augroup TransparentBG
