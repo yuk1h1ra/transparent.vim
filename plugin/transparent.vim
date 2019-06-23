@@ -23,10 +23,14 @@ function! s:clear_background() abort
   call s:highlight_group_bg_none('NonText')
 endfunction
 
-augroup Transparent
-  autocmd ColorScheme * execute "call s:clear_background()"
-  autocmd VimEnter * execute "call s:clear_background()"
+augroup TransparentBG
+  if get(g:, 'transparentBG_always_enable', 1)
+    autocmd ColorScheme * execute "call s:clear_background()"
+    autocmd VimEnter * execute "call s:clear_background()"
+  endif
 augroup END
+
+command! TransparentBGEnable call s:clear_background()
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
