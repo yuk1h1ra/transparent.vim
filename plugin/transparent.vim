@@ -10,11 +10,11 @@ let g:loaded_transparent = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! s:highlight_group_bg_none(hi_group)
+function! s:highlight_group_bg_none(hi_group) abort
   execute 'highlight ' . a:hi_group . ' ctermbg=NONE guibg=NONE'
 endfunction
 
-function! s:clear_background()
+function! s:clear_background() abort
   call s:highlight_group_bg_none('Normal')
   call s:highlight_group_bg_none('LineNr')
   call s:highlight_group_bg_none('CursorLine')
