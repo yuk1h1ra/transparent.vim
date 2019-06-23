@@ -23,6 +23,13 @@ function! s:clear_background() abort
   call s:highlight_group_bg_none('NonText')
 endfunction
 
+function! s:restore_background() abort
+  let l:colorscheme_name = get(g:, 'colors_name', '')
+  if l:colorscheme_name != ''
+    execute 'colorscheme' . l:colorscheme_name
+  endif
+endfunction
+
 augroup TransparentBG
   if get(g:, 'transparentBG_always_enable', 1)
     autocmd ColorScheme * execute "call s:clear_background()"
@@ -31,6 +38,7 @@ augroup TransparentBG
 augroup END
 
 command! TransparentBGEnable call s:clear_background()
+command! TransparentBGRestore call s:restore_background()
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
