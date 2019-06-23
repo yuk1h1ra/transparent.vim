@@ -25,7 +25,7 @@ endfunction
 
 function! s:restore_background() abort
   let l:colorscheme_name = get(g:, 'colors_name')
-  execute 'colorscheme' . l:colorscheme_name
+  execute 'colorscheme ' . l:colorscheme_name
 endfunction
 
 augroup TransparentBG
